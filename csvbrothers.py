@@ -14,7 +14,7 @@ import tkinter as tk
 from tkinter import filedialog
 
 # --- Configuração Principal ---
-MODEL_NAME = "gemini-1.5-flash"
+MODEL_NAME = "gemini-2.5-flash"
 DEFAULT_FOLDER_PATH = Path(r"")
 CATEGORIAS_ADOBE = {
     1: "Animals", 2: "Buildings and Architecture", 3: "Business", 4: "Drinks",
