@@ -94,6 +94,10 @@ Imagine que você tem os seguintes arquivos na sua pasta de processamento:
 
 Ao final, seu arquivo `metadata_DATA.csv` terá quatro linhas, com metadados consistentes para todos os seus arquivos, prontos para o upload.
 
+**💡 Dica para o Adobe Stock:**
+
+Ao fazer o upload para o Adobe Stock, você pode enviar **apenas os seus arquivos vetoriais** (`.svg` e `.eps`) e usar o arquivo CSV gerado pelo script. A plataforma da Adobe associará corretamente os metadados do CSV aos seus vetores com base no nome do arquivo, mesmo que a análise original da IA tenha sido feita a partir de um `.jpg` ou `.png`. Você não precisa enviar os arquivos de imagem se não quiser.
+
 ---
 
 ## Doação
