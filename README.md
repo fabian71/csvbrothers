@@ -94,3 +94,11 @@ Imagine que você tem os seguintes arquivos na sua pasta de processamento:
 
 Ao final, seu arquivo `metadata_DATA.csv` terá quatro linhas, com metadados consistentes para todos os seus arquivos, prontos para o upload.
 
+---
+
+## Doação
+
+Se esta ferramenta te ajuda, considere apoiar com um café ❤️
+
+[https://ko-fi.com/dentparanoide](https://ko-fi.com/dentparanoide)
+
