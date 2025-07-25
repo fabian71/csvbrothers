@@ -65,3 +65,32 @@ O script foi projetado para processar os seguintes formatos de arquivo:
 - **Imagens:** `.jpg`, `.jpeg`, `.png`
 - **Vídeos:** `.mp4` (o script extrai o primeiro frame do vídeo para análise)
 
+### Suporte Especial para Vetores (`.svg`, `.eps`)
+
+O script também oferece um suporte especial para arquivos vetoriais com as extensões `.svg` e `.eps`. Esta funcionalidade foi projetada para economizar seu tempo e manter a consistência dos metadados entre diferentes formatos do mesmo ativo artístico.
+
+**Como funciona e o que você precisa fazer:**
+
+O script **não envia** o arquivo vetorial para análise da IA. Em vez disso, ele de forma inteligente **reutiliza os metadados** de um arquivo de imagem (JPG ou PNG) que você já tenha na mesma pasta.
+
+Para que a mágica aconteça, você só precisa garantir uma coisa:
+
+**O arquivo vetorial (`.svg` ou `.eps`) deve ter exatamente o mesmo nome do arquivo de imagem correspondente, mudando apenas a extensão.**
+
+**Exemplo Prático:**
+
+Imagine que você tem os seguintes arquivos na sua pasta de processamento:
+
+- `gato-feliz.jpg`
+- `gato-feliz.svg`
+- `cachorro-brincando.png`
+- `cachorro-brincando.eps`
+
+1.  **Execute o script** normalmente.
+2.  **Primeiro Passo (Análise da IA):** O script irá analisar `gato-feliz.jpg` e `cachorro-brincando.png`, gerar o título, as palavras-chave e a categoria para cada um, e salvar essas informações no arquivo `metadata_DATA.csv`.
+3.  **Segundo Passo (Mágica dos Vetores):**
+    - O script encontrará o arquivo `gato-feliz.svg`. Ele vai procurar no CSV se já existem metadados para "gato-feliz". Como existem (do .jpg), ele **copiará** esses metadados e criará uma nova linha no CSV para `gato-feliz.svg`.
+    - O mesmo acontecerá para `cachorro-brincando.eps`, que usará os dados de `cachorro-brincando.png`.
+
+Ao final, seu arquivo `metadata_DATA.csv` terá quatro linhas, com metadados consistentes para todos os seus arquivos, prontos para o upload.
+

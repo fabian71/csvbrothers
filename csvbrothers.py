@@ -256,5 +256,81 @@ def main():
 
     print("🚀 Processamento de todas as imagens concluído!")
 
+    # --- NOVO BLOCO: Processamento de arquivos vetoriais associados ---
+    print("\n🔎 Verificando arquivos vetoriais associados (.svg, .eps)...")
+    
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    csv_file_name = f"metadata_{date_str}.csv"
+    csv_path = folder_path / csv_file_name
+
+    if not csv_path.exists():
+        print("  - Arquivo de metadados não encontrado. Nenhum arquivo vetorial será processado.")
+        print("🏁 Processo finalizado.")
+        return
+
+    # Ler metadados existentes do CSV
+    metadata_map = {}
+    try:
+        with open(csv_path, mode='r', newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            # Checar se o arquivo não está vazio
+            if not reader.fieldnames:
+                print("  - Arquivo de metadados está vazio. Nenhum arquivo vetorial será processado.")
+                print("🏁 Processo finalizado.")
+                return
+            for row in reader:
+                base_name = Path(row['Filename']).stem
+                metadata_map[base_name] = row
+    except Exception as e:
+        print(f"  - Erro ao ler o arquivo CSV: {e}. Nenhum arquivo vetorial será processado.")
+        print("🏁 Processo finalizado.")
+        return
+
+
+    if not metadata_map:
+        print("  - Nenhum metadado encontrado no arquivo CSV. Nenhum arquivo vetorial será processado.")
+        print("🏁 Processo finalizado.")
+        return
+
+    # Encontrar arquivos vetoriais e adicionar ao CSV se houver correspondência
+    vector_extensions = ('.svg', '.eps')
+    vector_files_found = [p for p in folder_path.iterdir() if p.suffix.lower() in vector_extensions]
+    
+    added_count = 0
+    for vector_path in vector_files_found:
+        if vector_path.name in processed_files:
+            print(f"  ⏩ Ignorando arquivo vetorial já processado: {vector_path.name}")
+            continue
+
+        vector_base_name = vector_path.stem
+        if vector_base_name in metadata_map:
+            print(f"  ✅ Encontrada correspondência para: {vector_path.name}")
+            metadata = metadata_map[vector_base_name]
+            
+            # Adicionar ao CSV
+            with open(csv_path, mode='a', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    vector_path.name, 
+                    metadata['Title'], 
+                    metadata['Keywords'], 
+                    metadata['Category ID']
+                ])
+            print(f"    -> Metadados para {vector_path.name} salvos em {csv_path}")
+            
+            # Adicionar ao log de processados
+            with open(processed_log_path, "a") as f:
+                f.write(f"{vector_path.name}\n")
+            print(f"    -> Registrado {vector_path.name} no arquivo de log.")
+            added_count += 1
+
+    if added_count > 0:
+        print(f"\n✨ Adicionados metadados para {added_count} arquivo(s) vetorial(is).")
+    else:
+        print("  - Nenhum novo arquivo vetorial correspondente encontrado para processar.")
+
+    print("🏁 Processo finalizado.")
+
+
 if __name__ == "__main__":
     main()
