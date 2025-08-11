@@ -2,3 +2,4 @@ google-generativeai
 Pillow
 opencv-python
 python-dotenv
+PyYAML

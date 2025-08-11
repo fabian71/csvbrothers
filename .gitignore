@@ -1,3 +1,4 @@
 # Arquivos de backup e de ambiente
 .env
 csvbrothers.py_bk
+__pycache__/
