@@ -14,7 +14,7 @@ O Csvbrothers é um script em Python desenvolvido para automatizar e otimizar o 
 *   **Saída em CSV**: Salva todos os metadados gerados em um único arquivo `.csv`, nomeado com a data do processamento (ex: `adobe_metadata_2025-07-12.csv`).
 *   **Controle de Arquivos Processados**: Mantém um registro (`processed_files.txt`) para não processar o mesmo arquivo duas vezes, permitindo que você continue o trabalho de onde parou.
 *   **Armazenamento Seguro da Chave**: Sua chave de API do Google é armazenada de forma segura em um arquivo `.env`, separado do código-fonte.
-*   **Exportação para Múltiplas Plataformas**: Gera arquivos CSV prontos para upload no Freepik e Dreamstime.
+*   **Exportação para Múltiplas Plataformas**: Gera arquivos CSV prontos para upload no Adobe Stock, Freepik e Dreamstime.
 
 ## REQUISITOS
 
@@ -91,9 +91,9 @@ Ao final, seu arquivo `adobe_metadata_DATA.csv` terá quatro linhas, com metadad
 
 Ao fazer o upload para o Adobe Stock, você pode enviar apenas os seus arquivos vetoriais (`.svg` e `.eps`) e usar o arquivo CSV gerado pelo script. A plataforma da Adobe associará corretamente os metadados do CSV aos seus vetores com base no nome do arquivo, mesmo que a análise original da IA tenha sido feita a partir de um `.jpg` ou `.png`. Você não precisa enviar os arquivos de imagem se não quiser.
 
-## EXPORTAÇÃO PARA FREEMIUM E DREAMSTIME
+## EXPORTAÇÃO PARA ADOBE STOCK, FREEPIK E DREAMSTIME
 
-O arquivo `exporters_core.py` é responsável por gerar os CSVs para Freepik e Dreamstime.
+O arquivo `exporters_core.py` é responsável por gerar os CSVs para Adobe Stock, Freepik e Dreamstime.
 Você pode personalizar as configurações de exportação editando este arquivo.
 Por exemplo, você pode mapear as categorias do Adobe Stock para as categorias do Dreamstime.
 
